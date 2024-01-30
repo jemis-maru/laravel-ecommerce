@@ -13,6 +13,16 @@ class Admin extends Authenticatable
     use Notifiable;
 
     protected $guard = 'admin';
+    
+    protected $fillable = [
+        'name',
+        'email',
+        'password'
+    ];
+
+    protected $hidden = [
+        'password'
+    ];
 
     public function getAuthPassword()
     {

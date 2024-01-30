@@ -50,6 +50,7 @@
       min-height: 100vh;
       position: fixed;
       left: 0;
+      display: none;
     }
 
     .sidebar a {
@@ -60,6 +61,10 @@
 
     .min-h-100 {
       min-height: 100vh;
+    }
+
+    .cursor-pointer {
+      cursor: pointer;
     }
   </style>
 </head>
@@ -79,8 +84,8 @@
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="profileMenu" data-bs-toggle="dropdown" aria-expanded="false">
               John Doe
             </a>
-            <ul class="dropdown-menu" aria-labelledby="profileMenu">
-              <li><a class="dropdown-item">Profile</a></li>
+            <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="profileMenu">
+              <li><a class="dropdown-item" href="/profile">Profile</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -99,7 +104,7 @@
       <aside class="sidebar" id="sidebar">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link">Home</a>
+            <a class="nav-link" href="/dashboard">Dashboard</a>
           </li>
           <li class="nav-item">
             <a class="nav-link">About Us</a>
@@ -119,10 +124,10 @@
   <script>
     const toggleSidebar = () => {
       const sidebar = document.getElementById('sidebar');
-      if (sidebar.style.display === "none") {
-        sidebar.style.display = "block";
-      } else {
+      if (sidebar.style.display === "block") {
         sidebar.style.display = "none";
+      } else {
+        sidebar.style.display = "block";
       }
     }
   </script>
