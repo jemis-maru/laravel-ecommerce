@@ -15,6 +15,11 @@
           @if(session('error'))
           <div class="alert alert-danger">{{ session('error') }}</div>
           @endif
+          
+          @if(session('success'))
+          <div class="alert alert-success">{{ session('success') }}</div>
+          @endif
+
 
           <form method="post" action="{{ route('login') }}">
             @csrf
@@ -29,7 +34,12 @@
               <input type="password" name="password" id="password" class="form-control" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div class="d-flex justify-content-between align-items-center">
+              <button type="submit" class="btn btn-primary">Login</button>
+              <a href="/forgot-password" class="cursor-pointer text-primary">
+                Forget password?
+              </a>
+            </div>
           </form>
         </div>
       </div>
