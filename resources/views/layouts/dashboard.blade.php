@@ -107,10 +107,7 @@
             <a class="nav-link" href="/dashboard">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Contact Us</a>
+            <a class="nav-link" href="/categories">Categories</a>
           </li>
         </ul>
       </aside>

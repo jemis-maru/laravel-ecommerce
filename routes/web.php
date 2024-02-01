@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ForgotPasswordController;
 
 /*
@@ -15,7 +16,7 @@ use App\Http\Controllers\ForgotPasswordController;
 |
 */
 
-Route::get('/', function() {
+Route::get('/', function () {
     return redirect()->route('login');
 });
 Route::get('/login', [AdminController::class, 'index'])->name('login');
@@ -30,5 +31,11 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::post('/update-profile', [AdminController::class, 'updateProfile'])->name('admin.updateProfile');
     Route::post('/change-password', [AdminController::class, 'changePassword'])->name('admin.changePassword');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 });
