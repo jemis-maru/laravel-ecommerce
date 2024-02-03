@@ -5,8 +5,8 @@
 @section('page-title', 'Dashboard')
 
 @section('content')
-<div class="container">
-  <div class="mb-3">
+<div class="container mt-4">
+  <div class="d-flex justify-content-end mb-3">
     <a href="{{ route('categories.create') }}" class="btn btn-primary">Add Category</a>
   </div>
 
@@ -59,6 +59,9 @@
       @endforeach
     </tbody>
   </table>
+  <div class="d-flex justify-content-end">
+    {{ $categories->render('ui.custom_pagination') }}
+  </div>
   @endif
 </div>
 @endsection
