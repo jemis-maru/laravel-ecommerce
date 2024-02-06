@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\User;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Comment;
 use Illuminate\Validation\ValidationException;
 
 class AdminController extends Controller
@@ -16,7 +20,7 @@ class AdminController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        return view('auth.login');
+        return view('admin.auth.login');
     }
 
     public function login(Request $request)
@@ -29,18 +33,23 @@ class AdminController extends Controller
             return redirect()->intended('/dashboard');
         }
 
-        return redirect()->route('login')->with('error', 'Invalid credentials');
+        return redirect()->route('admin.login')->with('error', 'Invalid credentials');
     }
 
     public function dashboard()
     {
-        return view('dashboard');
+        $customerCount = User::count();
+        $categoryCount = Category::count();
+        $productCount = Product::count();
+        $commentCount = Comment::count();
+
+        return view('admin.dashboard', compact('customerCount', 'categoryCount', 'productCount', 'commentCount'));
     }
 
     public function profile()
     {
         $admin = Auth::guard('admin')->user();
-        return view('profile', compact('admin'));
+        return view('admin.profile', compact('admin'));
     }
 
     public function updateProfile(Request $request)
@@ -90,6 +99,6 @@ class AdminController extends Controller
     {
         Auth::guard('admin')->logout();
 
-        return redirect()->route('login');
+        return redirect()->route('admin.login');
     }
 }

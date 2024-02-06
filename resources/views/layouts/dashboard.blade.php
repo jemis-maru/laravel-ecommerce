@@ -43,7 +43,7 @@
 
     .sidebar {
       width: 200px;
-      background: rgb(168, 225, 232, 0.5);
+      background: rgb(0, 0, 0, 0.5);
       color: #fff;
       padding: 20px;
       padding-top: 80px;
@@ -51,12 +51,13 @@
       position: fixed;
       left: 0;
       display: none;
+      z-index: 500;
     }
 
     .sidebar a {
       font-weight: bolder;
       text-decoration: none;
-      color: #008b9b !important;
+      color: #ffffff !important;
     }
 
     .min-h-100 {

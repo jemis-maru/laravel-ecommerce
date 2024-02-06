@@ -14,7 +14,7 @@ class ForgotPasswordController extends Controller
 {
     public function showForgotPasswordForm()
     {
-        return view('auth.forgot-password');
+        return view('admin.auth.forgot-password');
     }
 
     public function sendPasswordResetEmail(Request $request)
@@ -41,7 +41,7 @@ class ForgotPasswordController extends Controller
 
     public function showResetPasswordForm($token)
     {
-        return view('auth.reset-password', ['token' => $token]);
+        return view('admin.auth.reset-password', ['token' => $token]);
     }
 
     public function resetPassword(Request $request)
@@ -73,11 +73,11 @@ class ForgotPasswordController extends Controller
 
             $passwordReset->delete();
 
-            return redirect()->route('login')->with('success', 'Password updated successfully');
+            return redirect()->route('admin.login')->with('success', 'Password updated successfully');
         } catch (ValidationException $e) {
-            return redirect()->route('password.reset', ['token' => $request->token])->with('error', $e->getMessage());
+            return redirect()->route('admin.password.reset', ['token' => $request->token])->with('error', $e->getMessage());
         } catch (\Exception $e) {
-            return redirect()->route('password.reset', ['token' => $request->token])->with('error', 'An error occurred while resetting the password');
+            return redirect()->route('admin.password.reset', ['token' => $request->token])->with('error', 'An error occurred while resetting the password');
         }
     }
 }

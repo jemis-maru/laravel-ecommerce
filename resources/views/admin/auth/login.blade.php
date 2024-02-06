@@ -21,7 +21,7 @@
           @endif
 
 
-          <form method="post" action="{{ route('login') }}">
+          <form method="post" action="{{ route('admin.loginAction') }}">
             @csrf
 
             <div class="mb-3">
@@ -36,7 +36,7 @@
 
             <div class="d-flex justify-content-between align-items-center">
               <button type="submit" class="btn btn-primary">Login</button>
-              <a href="/forgot-password" class="cursor-pointer text-primary">
+              <a href="/admin/forgot-password" class="cursor-pointer text-primary">
                 Forget password?
               </a>
             </div>

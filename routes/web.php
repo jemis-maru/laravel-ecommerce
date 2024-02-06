@@ -7,6 +7,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CommentController;
+use Illuminate\Contracts\View\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,14 +23,19 @@ use App\Http\Controllers\CommentController;
 Route::get('/', function () {
     return redirect()->route('login');
 });
-Route::get('/login', [AdminController::class, 'index'])->name('login');
-Route::post('/login', [AdminController::class, 'login']);
-Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('password.request');
-Route::post('/forgot-password', [ForgotPasswordController::class, 'sendPasswordResetEmail'])->name('password.email');
-Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('password.reset');
-Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.resetPass');
 
-Route::middleware('auth:admin')->group(function () {
+Route::get('/login', function () {
+    return view('frontend.login');
+})->name('login');
+
+Route::get('/admin/login', [AdminController::class, 'index'])->name('admin.login');
+Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.loginAction');
+Route::get('/admin/forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('admin.password.request');
+Route::post('/admin/forgot-password', [ForgotPasswordController::class, 'sendPasswordResetEmail'])->name('admin.password.email');
+Route::get('/admin/reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('admin.password.reset');
+Route::post('/admin/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('admin.password.resetPass');
+
+Route::middleware('auth.admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
     Route::post('/update-profile', [AdminController::class, 'updateProfile'])->name('admin.updateProfile');

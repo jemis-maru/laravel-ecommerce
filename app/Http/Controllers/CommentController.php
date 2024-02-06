@@ -11,6 +11,6 @@ class CommentController extends Controller
     {
         $comments = Comment::with('product', 'user')->paginate(10);;
 
-        return view('comments.index', compact('comments'));
+        return view('admin.comments.index', compact('comments'));
     }
 }
