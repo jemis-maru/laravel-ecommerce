@@ -36,8 +36,8 @@
 
             <div class="d-flex justify-content-between align-items-center">
               <button type="submit" class="btn btn-primary">Login</button>
-              <a href="/admin/forgot-password" class="cursor-pointer text-primary">
-                Forget password?
+              <a href="/signup" class="cursor-pointer text-primary">
+                New user? Register here
               </a>
             </div>
           </form>

@@ -24,8 +24,10 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+Route::get('/signup', [UserController::class, 'showSignupForm'])->name('signup');
+Route::post('/signup', [UserController::class, 'signup']);
 Route::get('/login', function () {
-    return view('frontend.login');
+    return view('frontend.auth.login');
 })->name('login');
 
 Route::get('/admin/login', [AdminController::class, 'index'])->name('admin.login');
