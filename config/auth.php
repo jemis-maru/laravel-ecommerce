@@ -45,6 +45,11 @@ return [
             'driver' => 'session',
             'provider' => 'admins', // Change 'admins' to the name of your admin provider
         ],
+
+        'user' => [
+            'driver' => 'session',
+            'provider' => 'users', // Change 'users' to the name of your user provider
+        ],
     ],
 
     /*
@@ -70,10 +75,10 @@ return [
             'model' => App\Models\Admin::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
     ],
 
     /*

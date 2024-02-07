@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -52,5 +53,18 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('signup')->with('error', 'An error occurred while registration');
         }
+    }
+    
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        $user = User::where('email', $credentials['email'])->first();
+
+        if ($user && Auth::guard('user')->attempt(['email' => $user->email, 'password' => $credentials['password']])) {
+            return redirect()->intended('/product-listing');
+        }
+
+        return redirect()->route('login')->with('error', 'Invalid credentials');
     }
 }

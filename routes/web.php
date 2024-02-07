@@ -29,6 +29,13 @@ Route::post('/signup', [UserController::class, 'signup']);
 Route::get('/login', function () {
     return view('frontend.auth.login');
 })->name('login');
+Route::post('/login', [UserController::class, 'login']);
+
+Route::middleware('auth.user')->group(function () {
+    Route::get('/product-listing', function () {
+        return view('frontend.pages.listing');
+    })->name('listing');
+});
 
 Route::get('/admin/login', [AdminController::class, 'index'])->name('admin.login');
 Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.loginAction');
