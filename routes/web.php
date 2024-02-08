@@ -26,15 +26,21 @@ Route::get('/', function () {
 
 Route::get('/signup', [UserController::class, 'showSignupForm'])->name('signup');
 Route::post('/signup', [UserController::class, 'signup']);
-Route::get('/login', function () {
-    return view('frontend.auth.login');
-})->name('login');
+Route::get('/login', [UserController::class, 'loginPage'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
+Route::get('/forgot-password', [UserController::class, 'showForgotPasswordForm'])->name('password.request');
+Route::post('/forgot-password', [UserController::class, 'sendPasswordResetEmail'])->name('password.email');
+Route::get('/reset-password/{token}', [UserController::class, 'showResetPasswordForm'])->name('password.reset');
+Route::post('/reset-password', [UserController::class, 'resetPassword'])->name('password.resetPass');
 
 Route::middleware('auth.user')->group(function () {
     Route::get('/product-listing', function () {
         return view('frontend.pages.listing');
     })->name('listing');
+    Route::get('/myprofile', [UserController::class, 'profile'])->name('profile');
+    Route::post('/update-user', [UserController::class, 'updateProfile'])->name('updateProfile');
+    Route::post('/change-user-password', [UserController::class, 'changePassword'])->name('changePassword');
+    Route::post('/logoutUser', [UserController::class, 'logout'])->name('logout');
 });
 
 Route::get('/admin/login', [AdminController::class, 'index'])->name('admin.login');

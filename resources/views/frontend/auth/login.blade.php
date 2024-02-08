@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Admin Login | E-Commerce')
+@section('title', 'Login | E-Commerce')
 
 @section('content')
 <div class="container mt-5">
@@ -36,6 +36,11 @@
 
             <div class="d-flex justify-content-between align-items-center">
               <button type="submit" class="btn btn-primary">Login</button>
+              <a href="/forgot-password" class="cursor-pointer text-primary">
+                Forgot password?
+              </a>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mt-3">
               <a href="/signup" class="cursor-pointer text-primary">
                 New user? Register here
               </a>
