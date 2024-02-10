@@ -10,6 +10,7 @@ use App\Models\User;
 class Comment extends Model
 {
     use HasFactory;
+    protected $fillable = ['comment', 'product_id', 'user_id'];
     
     public function product()
     {

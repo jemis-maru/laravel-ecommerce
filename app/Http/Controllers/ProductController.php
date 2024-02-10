@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 use App\Models\Category;
 use Aws\S3\Exception\S3Exception;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -97,5 +98,34 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('products.index')->with('success', 'Product deleted successfully');
+    }
+
+    public function productListing()
+    {
+        $products = Product::paginate(3);
+        return view('frontend.pages.listing', compact('products'));
+    }
+
+    public function addComment(Request $request, $productId)
+    {
+        $user = Auth::guard('user');
+        $userId = $user->id();
+
+        $request->validate([
+            'comment' => 'required|string|max:255',
+        ]);
+
+        $product = Product::findOrFail($productId);
+        
+        if ($product->comments()->where('user_id', $userId)->exists()) {
+            return back()->withErrors(['error' => 'You have already commented on this product.']);
+        }
+
+        $product->comments()->create([
+            'comment' => $request->comment,
+            'user_id' => $userId,
+        ]);
+
+        return back()->with('success', 'Comment added successfully!');
     }
 }

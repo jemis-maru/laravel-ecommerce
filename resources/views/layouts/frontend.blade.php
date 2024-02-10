@@ -45,6 +45,31 @@
     .cursor-pointer {
       cursor: pointer;
     }
+
+    .product-card {
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      height: 100%;
+    }
+
+    .product-card .card-body {
+      padding: 20px;
+    }
+
+    .product-card .card-img-top {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .comment-section {
+      margin-top: 20px;
+    }
+
+    .comment-section ul {
+      padding-left: 20px;
+    }
   </style>
 </head>
 
