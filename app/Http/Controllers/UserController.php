@@ -74,8 +74,13 @@ class UserController extends Controller
 
         $user = User::where('email', $credentials['email'])->first();
 
-        if ($user && Auth::guard('user')->attempt(['email' => $user->email, 'password' => $credentials['password']])) {
-            return redirect()->intended('/product-listing');
+        if($user->is_active === 0) {
+            return redirect()->route('login')->with('error', 'Your Account is deactivated!');
+        }
+        else {
+            if ($user && Auth::guard('user')->attempt(['email' => $user->email, 'password' => $credentials['password']])) {
+                return redirect()->route('login')->with('error', 'Your account is deactivated');
+            }
         }
 
         return redirect()->route('login')->with('error', 'Invalid credentials');

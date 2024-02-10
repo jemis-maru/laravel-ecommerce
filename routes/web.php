@@ -34,7 +34,7 @@ Route::get('/reset-password/{token}', [UserController::class, 'showResetPassword
 Route::post('/reset-password', [UserController::class, 'resetPassword'])->name('password.resetPass');
 
 Route::middleware('auth.user')->group(function () {
-    Route::get('/product-listing', [ProductController::class, 'productListing'])->name('products')->name('listing');
+    Route::get('/product-listing', [ProductController::class, 'productListing'])->name('listing');
     Route::post('/products/{productId}/comment', [ProductController::class, 'addComment'])->name('product.addComment');
     Route::get('/myprofile', [UserController::class, 'profile'])->name('profile');
     Route::post('/update-user', [UserController::class, 'updateProfile'])->name('updateProfile');
