@@ -6,6 +6,12 @@
 
 @section('content')
 <div class="container mt-4">
+  <form action="{{ route('users.index') }}" method="GET" class="mb-4">
+    <div class="input-group">
+      <input type="text" name="query" class="form-control" value="{{ request()->input('query') }}" placeholder="Search users...">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
 
   @if(session('success'))
   <div class="alert alert-success">{{ session('success') }}</div>

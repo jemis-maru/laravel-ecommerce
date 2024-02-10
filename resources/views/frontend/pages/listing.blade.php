@@ -4,6 +4,12 @@
 
 @section('content') 
 <div class="container mt-5">
+  <form action="{{ route('listing') }}" method="GET" class="mb-4">
+    <div class="input-group">
+      <input type="text" name="query" class="form-control" value="{{ request()->input('query') }}" placeholder="Search products...">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
   <div class="row">
     @foreach($products as $product)
     <div class="col-md-4">

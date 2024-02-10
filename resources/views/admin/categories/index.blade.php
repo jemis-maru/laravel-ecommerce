@@ -9,6 +9,12 @@
   <div class="d-flex justify-content-end mb-3">
     <a href="{{ route('categories.create') }}" class="btn btn-primary">Add Category</a>
   </div>
+  <form action="{{ route('categories.index') }}" method="GET" class="mb-4">
+    <div class="input-group">
+      <input type="text" name="query" class="form-control" value="{{ request()->input('query') }}" placeholder="Search categories...">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
 
   @if(session('success'))
   <div class="alert alert-success">{{ session('success') }}</div>

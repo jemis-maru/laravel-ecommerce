@@ -11,9 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(10);
+        $query = $request->input('query');
+        $products = Product::where('name', 'LIKE', "%$query%")
+                    ->paginate(10);
         return view('admin.products.index', compact('products'));
     }
 
@@ -100,9 +102,11 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product deleted successfully');
     }
 
-    public function productListing()
+    public function productListing(Request $request)
     {
-        $products = Product::paginate(3);
+        $query = $request->input('query');
+        $products = Product::where('name', 'LIKE', "%$query%")
+                    ->paginate(3);
         return view('frontend.pages.listing', compact('products'));
     }
 

@@ -9,6 +9,12 @@
   <div class="mb-3">
     <a href="{{ route('products.create') }}" class="btn btn-primary">Add Product</a>
   </div>
+  <form action="{{ route('products.index') }}" method="GET" class="mb-4">
+    <div class="input-group">
+      <input type="text" name="query" class="form-control" value="{{ request()->input('query') }}" placeholder="Search products...">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
 
   @if(session('success'))
   <div class="alert alert-success">{{ session('success') }}</div>

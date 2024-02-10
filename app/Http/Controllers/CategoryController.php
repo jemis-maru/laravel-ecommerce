@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::paginate(10);
+        $query = $request->input('query');
+        $categories = Category::where('name', 'LIKE', "%$query%")->paginate(10);
         return view('admin.categories.index', compact('categories'));
     }
 

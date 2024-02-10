@@ -14,9 +14,12 @@ use App\Mail\ResetUserPassword;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(10);
+        $query = $request->input('query');
+        $users = User::where('name', 'LIKE', "%$query%")
+                    ->paginate(10);
+                    
         return view('admin.users.index', compact('users'));
     }
 

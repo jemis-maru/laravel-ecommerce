@@ -7,9 +7,11 @@ use App\Models\Comment;
 
 class CommentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $comments = Comment::with('product', 'user')->paginate(10);;
+        $query = $request->input('query');
+        $comments = Comment::where('comment', 'LIKE', "%$query%")
+                    ->paginate(10);
 
         return view('admin.comments.index', compact('comments'));
     }
