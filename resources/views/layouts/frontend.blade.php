@@ -83,7 +83,7 @@
           </div>
           <div class="dropdown">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="profileMenu" data-bs-toggle="dropdown" aria-expanded="false">
-              John Doe
+              {{ Auth::guard('user')->user()->name }}
             </a>
             <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="profileMenu">
               <li><a class="dropdown-item" href="/myprofile">Profile</a></li>

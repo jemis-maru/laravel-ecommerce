@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 
-@section('title', 'Dashboard')
+@section('title', 'Profile | E-Commerce')
 
 @section('content')
 <div class="row mt-3">

@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Dashboard')
+@section('title', 'Products | Dashboard')
 
-@section('page-title', 'Dashboard')
+@section('page-title', 'Products')
 
 @section('content')
 <div class="container mt-4">

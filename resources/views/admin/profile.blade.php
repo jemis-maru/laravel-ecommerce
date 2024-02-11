@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Dashboard')
+@section('title', 'Profile | Dashboard')
 
-@section('page-title', 'Dashboard')
+@section('page-title', 'Profile')
 
 @section('content')
 <div class="row mt-3">

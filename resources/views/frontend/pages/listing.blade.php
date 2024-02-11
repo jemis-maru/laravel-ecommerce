@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 
-@section('title', 'Dashboard')
+@section('title', 'Products | E-Commerce')
 
 @section('content') 
 <div class="container mt-5">

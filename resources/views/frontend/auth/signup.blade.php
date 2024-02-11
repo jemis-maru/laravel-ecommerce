@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Login | E-Commerce')
+@section('title', 'Signup | E-Commerce')
 
 @section('content')
 <div class="container mt-5">
