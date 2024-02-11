@@ -32,6 +32,8 @@ Route::get('/forgot-password', [UserController::class, 'showForgotPasswordForm']
 Route::post('/forgot-password', [UserController::class, 'sendPasswordResetEmail'])->name('password.email');
 Route::get('/reset-password/{token}', [UserController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('/reset-password', [UserController::class, 'resetPassword'])->name('password.resetPass');
+Route::get('/google/redirect', [UserController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('/google/callback', [UserController::class, 'handleGoogleCallback'])->name('google.callback');
 
 Route::middleware('auth.user')->group(function () {
     Route::get('/product-listing', [ProductController::class, 'productListing'])->name('listing');

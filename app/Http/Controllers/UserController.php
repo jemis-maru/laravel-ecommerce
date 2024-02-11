@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use App\Models\PasswordReset;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ResetUserPassword;
+use Laravel\Socialite\Facades\Socialite;
 
 class UserController extends Controller
 {
@@ -82,7 +83,7 @@ class UserController extends Controller
         }
         else {
             if ($user && Auth::guard('user')->attempt(['email' => $user->email, 'password' => $credentials['password']])) {
-                return redirect()->route('login')->with('error', 'Your account is deactivated');
+                return redirect()->route('listing');
             }
         }
 
@@ -207,6 +208,29 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('profile')->with('error', 'An error occurred while changing the password');
         }
+    }
+
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        $googleUser = Socialite::driver('google')->stateless()->user();
+
+        $user = User::where('email', $googleUser->email)->first();
+
+        if($user && $user->is_active === 0) {
+            return redirect()->route('login')->with('error', 'Your Account is deactivated!');
+        }
+        else {
+            if ($user && Auth::guard('user')->login($user)) {
+                return redirect()->route('listing');
+            }
+        }
+
+        return redirect()->route('login')->with('error', 'Invalid credentials');
     }
 
     public function logout()
