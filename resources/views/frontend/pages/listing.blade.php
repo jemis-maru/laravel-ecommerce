@@ -19,21 +19,9 @@
           <h5 class="card-title">{{ $product->name }}</h5>
           <p class="card-text">Model: {{ $product->model_name }}</p>
           <p class="card-text">Quantity: {{ $product->quantity }}</p>
-          <div class="comment-section">
-            <h6>Comments:</h6>
-            <ul>
-              @forelse($product->comments as $comment)
-              <li>{{ $comment->comment }}</li>
-              @empty
-              <li>No comments yet.</li>
-              @endforelse
-            </ul>
-            @if(!$product->comments()->where('user_id', Auth::guard('user')->id())->exists())
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal{{ $product->id }}">
-              Add Comment
-            </button>
-            @endif
-          </div>
+          <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#commentModal{{ $product->id }}">
+            Comments
+          </button>
         </div>
       </div>
     </div>
@@ -45,6 +33,17 @@
             <h5 class="modal-title" id="commentModalLabel">Add Comment</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
+          <div class="comment-section modal-body">
+            <h6>Comments:</h6>
+            <ul>
+              @forelse($product->comments as $comment)
+              <li>{{ $comment->comment }}</li>
+              @empty
+              <li>No comments yet.</li>
+              @endforelse
+            </ul>
+          </div>
+          @if(!$product->comments()->where('user_id', Auth::guard('user')->id())->exists())
           <form method="POST" action="{{ route('product.addComment', $product->id) }}">
             @csrf
             <div class="modal-body">
@@ -58,6 +57,7 @@
               <button type="submit" class="btn btn-primary">Add Comment</button>
             </div>
           </form>
+          @endif
         </div>
       </div>
     </div>
